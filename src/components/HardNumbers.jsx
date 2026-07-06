@@ -1,6 +1,6 @@
 import { T, CAT, mono } from "../theme.js";
 import { NUMBER_GROUPS } from "../data/hardNumbers.js";
-import { SectionLabel, Hi, useFocusFlash } from "./atoms.jsx";
+import { SectionLabel, Hi, useFocusFlash, SourceDrawer } from "./atoms.jsx";
 
 export default function HardNumbers({ focusId }) {
   useFocusFlash(focusId);
@@ -22,6 +22,7 @@ export default function HardNumbers({ focusId }) {
                     fontWeight: 700, margin: "5px 0 4px", textTransform: "uppercase" }}>{n.label}</div>
                   <div style={{ fontSize: 12, lineHeight: 1.5 }}>
                     <Hi text={n.detail} base={T.dim} /></div>
+                  <SourceDrawer src={n.src} />
                 </div>
               );
             })}

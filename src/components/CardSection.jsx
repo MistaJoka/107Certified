@@ -1,7 +1,7 @@
 import { T, mono } from "../theme.js";
 import { CARD_SECTIONS, OOP_MATRIX, OOP_CARDS, CERT_STEPS } from "../data/cards.js";
 import { TwilightSVG, RunwayCompassSVG, PatternLegsSVG } from "./diagrams.jsx";
-import { SectionLabel, Reveal, Panel, Hi, useFocusFlash } from "./atoms.jsx";
+import { SectionLabel, Reveal, Panel, Hi, useFocusFlash, SourceDrawer } from "./atoms.jsx";
 
 const cardList = (cards, focusId) =>
   cards.map((c) => <Reveal key={c.id} {...c} open={focusId === c.id} />);
@@ -28,6 +28,7 @@ function OOPMatrix() {
             color: m.assembly === "NEVER" ? T.red : T.amber }}>
             OPEN-AIR ASSEMBLY: {m.assembly.toUpperCase()}</div>
           <div style={{ fontSize: 11.5, color: T.dim, lineHeight: 1.45 }}>{m.note}</div>
+          <SourceDrawer src={m.src} />
         </div>
       </div>
     );
@@ -49,6 +50,7 @@ function CertPath() {
         <div style={{ fontFamily: mono, fontSize: 13, fontWeight: 700, letterSpacing: 0.5,
           color: T.text, margin: "4px 0 4px" }}>{s.title}</div>
         <div style={{ fontSize: 12.5, lineHeight: 1.5 }}><Hi text={s.detail} base={T.dim} /></div>
+        <SourceDrawer src={s.src} />
       </div>
     </div>
   ));

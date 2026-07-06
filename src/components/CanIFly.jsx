@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { T, CAT, mono } from "../theme.js";
 import { TREES } from "../data/trees.js";
-import { Badge, Tag, Hi, useFocusFlash } from "./atoms.jsx";
+import { Badge, Tag, Hi, useFocusFlash, SourceDrawer } from "./atoms.jsx";
 
 function Walker({ tree }) {
   const [path, setPath] = useState([]);            // [{key, ans}]
@@ -34,6 +34,7 @@ function Walker({ tree }) {
           <div style={{ fontFamily: mono, fontSize: 11.5, lineHeight: 1.5, color: c,
             background: c + "12", borderLeft: `2px solid ${c}`, padding: "6px 9px",
             borderRadius: "0 4px 4px 0" }}><Hi text={node.rule} base={c} /></div>
+          <SourceDrawer src={node.src} />
           <button onClick={() => setPath([])} style={{ marginTop: 12, fontFamily: mono, fontSize: 11,
             letterSpacing: 1, color: T.dim, background: "none", border: `1px solid ${T.line}`,
             borderRadius: 6, padding: "7px 12px", cursor: "pointer" }}>↺ START OVER</button>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { T, mono } from "../theme.js";
 import { MANTRA, AIRSPACE_ITEMS } from "../data/airspace.js";
 import { LegendTile } from "./diagrams.jsx";
-import { Badge, Hi, useFocusFlash } from "./atoms.jsx";
+import { Badge, Hi, useFocusFlash, SourceDrawer } from "./atoms.jsx";
 
 export default function AirspaceDecoder({ focusId }) {
   const [openId, setOpenId] = useState(focusId || null);
@@ -46,6 +46,7 @@ export default function AirspaceDecoder({ focusId }) {
             <Hi text={open.answer} base={T.text} /></div>
           <div style={{ fontSize: 12.5, lineHeight: 1.55 }}>
             <Hi text={open.detail} base={T.dim} /></div>
+          <SourceDrawer src={open.src} />
         </div>
       )}
     </>
