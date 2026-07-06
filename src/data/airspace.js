@@ -77,4 +77,21 @@ export const AIRSPACE_ITEMS = [
     detail: "Maximum Elevation Figure. Bold obstacle numbers = MSL; (parens) = AGL; lightning bolt = lighted.",
     kw: "mef maximum elevation figure obstacle tower quadrant",
     src: S("CUG") },
+  { id: "as-obst", sym: "obstacle", title: "Obstacle symbols", verdict: "INFO",
+    answer: "Upside-down 'V' = obstacle. With a lightning-bolt tip = lighted. Double = group of obstacles.",
+    detail: "Bold number = top in ft MSL; (parens) = height AGL. Towers over 1,000 ft AGL get the taller symbol — guy wires extend far beyond what you see.",
+    kw: "obstacle tower guy wires lighted msl agl symbol", src: S("CUG") },
+];
+
+// ── AIRPORT DATA BLOCK — the text next to the airport symbol ───────
+export const DATABLOCK_SRC = S("CUG");
+export const DATABLOCK_TOKENS = [
+  { t: "CHESTER", label: "Name", m: "Airport name. The identifier follows in parentheses on some charts." },
+  { t: "CT - 118.3", label: "Tower", m: "CT = control tower, on 118.3 MHz. When the tower is the CTAF after hours, a star follows the frequency." },
+  { t: "✱", label: "Part-time star", m: "The star means PART-TIME — tower or lighting doesn't run 24/7. Hours live in the Chart Supplement." },
+  { t: "L", label: "Lighting", m: "Runway lights operate sunset to sunrise. ✱L = part-time or pilot-activated lighting." },
+  { t: "62", label: "Elevation", m: "Field elevation: 62 ft MSL. This is the number that converts chart MSL altitudes to your AGL world." },
+  { t: "50", label: "Runway length", m: "Longest runway in hundreds of feet — 50 = 5,000 ft." },
+  { t: "122.95", label: "UNICOM", m: "UNICOM frequency. At non-towered fields this is often also the CTAF — monitor it for traffic." },
+  { t: "RP 27", label: "Right pattern", m: "RP = RIGHT traffic pattern for runway 27 (left is standard). Manned traffic turns where you might not expect." },
 ];

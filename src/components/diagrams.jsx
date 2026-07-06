@@ -88,6 +88,15 @@ export function LegendTile({ sym }) {
         <text x="6" y="46" fill={T.blue} style={{ font: `bold 10px ${mono}` }}>E</text>
         <text x="6" y="73" fill={T.green} style={{ font: `bold 10px ${mono}` }}>G ← you</text>
       </svg>);
+    case "obstacle": return (
+      <svg viewBox="0 0 120 80" style={{ width: "100%", display: "block" }}>
+        {grid}
+        <path d="M 38 62 l 8 -26 l 8 26" fill="none" stroke={T.blue} strokeWidth="2" />
+        <path d="M 78 62 l 7 -34 l 7 34" fill="none" stroke={T.blue} strokeWidth="2" />
+        <path d="M 85 28 l 3 -7 l -4 3 l 3 -8" fill="none" stroke={T.amber} strokeWidth="1.6" />
+        <text x="46" y="74" textAnchor="middle" fill={T.text} style={{ font: `bold 8px ${mono}` }}>724</text>
+        <text x="85" y="74" textAnchor="middle" fill={T.dim} style={{ font: `8px ${mono}` }}>(1049)</text>
+      </svg>);
     default: return null;
   }
 }

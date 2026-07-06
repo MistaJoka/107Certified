@@ -3,7 +3,7 @@ import { SOURCES } from "./sources.js";
 import { ALL_NUMBERS } from "./hardNumbers.js";
 import { TREES } from "./trees.js";
 import { CARD_SECTIONS, OOP_MATRIX, OOP_CARDS, CERT_STEPS } from "./cards.js";
-import { AIRSPACE_ITEMS } from "./airspace.js";
+import { AIRSPACE_ITEMS, DATABLOCK_SRC } from "./airspace.js";
 import { WX_CARDS, METAR_SRC, TAF_SRC } from "./weather.js";
 import { GRID_DETAILS as AUTH_GRID, TFR_CARDS, NOTAM_SRC, LAANC_SRC } from "./authorization.js";
 
@@ -34,7 +34,10 @@ describe("citation coverage — cards", () => {
 });
 
 describe("citation coverage — decoders", () => {
-  it("airspace items", () => checkSrc(AIRSPACE_ITEMS, "airspace"));
+  it("airspace items", () => {
+    checkSrc(AIRSPACE_ITEMS, "airspace");
+    expect(SOURCES[DATABLOCK_SRC.doc]).toBeTruthy();
+  });
   it("weather cards + strip sources", () => {
     checkSrc(WX_CARDS, "wxCards");
     expect(SOURCES[METAR_SRC.doc]).toBeTruthy();

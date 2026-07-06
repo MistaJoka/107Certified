@@ -1,7 +1,7 @@
 // ── GLOBAL SEARCH — one flat index over every fact in the app ──────
 import { ALL_NUMBERS } from "./hardNumbers.js";
 import { TREES } from "./trees.js";
-import { AIRSPACE_ITEMS } from "./airspace.js";
+import { AIRSPACE_ITEMS, DATABLOCK_TOKENS } from "./airspace.js";
 import { METAR_TOKENS, TAF_TOKENS, WX_CARDS } from "./weather.js";
 import { CARD_SECTIONS, OOP_MATRIX, OOP_CARDS, CERT_STEPS } from "./cards.js";
 import { GRID_DETAILS, LAANC_FLOW, TFR_CARDS, NOTAM_TOKENS } from "./authorization.js";
@@ -20,6 +20,10 @@ TREES.forEach((t) => {
 
 AIRSPACE_ITEMS.forEach((a) =>
   add({ id: a.id, section: "airspace", cat: "CHART", title: `${a.title} — ${a.answer}`, body: a.detail, kw: a.kw }));
+DATABLOCK_TOKENS.forEach((tk, i) =>
+  add({ id: `datablock-${i}`, section: "airspace", cat: "CHART",
+    title: `Data block ${tk.t} — ${tk.label}`, body: tk.m,
+    kw: "airport data block sectional decode ctaf elevation" }));
 
 METAR_TOKENS.forEach((tk, i) =>
   add({ id: `metar-${i}`, section: "weather", cat: "WX", title: `METAR ${tk.t} — ${tk.label}`, body: tk.m, kw: "metar decode" }));

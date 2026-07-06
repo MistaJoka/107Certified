@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { T, mono } from "../theme.js";
-import { MANTRA, AIRSPACE_ITEMS } from "../data/airspace.js";
+import { MANTRA, AIRSPACE_ITEMS, DATABLOCK_TOKENS, DATABLOCK_SRC } from "../data/airspace.js";
 import { LegendTile } from "./diagrams.jsx";
-import { Badge, Hi, useFocusFlash, SourceDrawer } from "./atoms.jsx";
+import { Badge, Hi, useFocusFlash, SourceDrawer, SectionLabel, TokenStrip } from "./atoms.jsx";
 
 export default function AirspaceDecoder({ focusId }) {
   const [openId, setOpenId] = useState(focusId || null);
@@ -32,6 +32,9 @@ export default function AirspaceDecoder({ focusId }) {
           );
         })}
       </div>
+
+      <SectionLabel color={T.blue}>AIRPORT DATA BLOCK — TAP IT APART</SectionLabel>
+      <TokenStrip tokens={DATABLOCK_TOKENS} prefix="datablock" color={T.blue} src={DATABLOCK_SRC} />
 
       {open && (
         <div style={{ position: "sticky", bottom: 12, marginTop: 12, background: T.panel2,
