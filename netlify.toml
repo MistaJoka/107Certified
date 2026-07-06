@@ -1,0 +1,27 @@
+# Netlify deploy config for the 107Certified PWA.
+# Connect this repo in Netlify (or drag `dist/` to app.netlify.com/drop) — it
+# builds and serves from a root domain, which the absolute asset paths need.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# SPA fallback: serve index.html for any unknown path so deep links work.
+# The app uses hash routing (#/section/...), so the URL path is normally "/",
+# but this future-proofs any non-hash navigation.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Never let the service worker or manifest get stuck in a stale cache;
+# autoUpdate handles app assets, but these bootstrap files must stay fresh.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Cache-Control = "no-cache"
