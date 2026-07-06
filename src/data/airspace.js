@@ -74,13 +74,17 @@ export const AIRSPACE_ITEMS = [
     src: S("AIM") },
   { id: "as-mef", sym: "mef", title: "Big quadrant number 3²", verdict: "INFO",
     answer: "MEF: highest obstacle/terrain in the quadrant — 3,200 ft MSL, rounded up.",
-    detail: "Maximum Elevation Figure. Bold obstacle numbers = MSL; (parens) = AGL; lightning bolt = lighted.",
+    detail: "Maximum Elevation Figure. Bold obstacle numbers = MSL; (parens) = AGL; lightning bolt = lighted. MEF is clearance info for manned aircraft — your 400 ft AGL drone ceiling applies regardless.",
     kw: "mef maximum elevation figure obstacle tower quadrant",
     src: S("CUG") },
   { id: "as-obst", sym: "obstacle", title: "Obstacle symbols", verdict: "INFO",
     answer: "Upside-down 'V' = obstacle. With a lightning-bolt tip = lighted. Double = group of obstacles.",
     detail: "Bold number = top in ft MSL; (parens) = height AGL. Towers over 1,000 ft AGL get the taller symbol — guy wires extend far beyond what you see.",
     kw: "obstacle tower guy wires lighted msl agl symbol", src: S("CUG") },
+  { id: "as-private", sym: "private", title: "Circle with R (Pvt)", verdict: "INFO",
+    answer: "Private / restricted-use airport — not open to the public.",
+    detail: "An open circle with 'R' inside (or '(Pvt)' by the name) marks a private airport. It still generates traffic — monitor for aircraft even though it's not in the Chart Supplement's public listings.",
+    kw: "private restricted airport pvt r circle not public", src: S("CUG") },
 ];
 
 // ── AIRPORT DATA BLOCK — the text next to the airport symbol ───────

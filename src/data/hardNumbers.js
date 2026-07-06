@@ -82,7 +82,7 @@ export const NUMBER_GROUPS = [
       { id: "n-test", value: "60 Q / 70%", label: "The knowledge test", cat: "REG",
         detail: "$175 at a PSI center, 2 hours, chart supplement provided. Fail → 14-day wait (and full fee again).",
         kw: "exam test psi 175 questions pass fail retest 14",
-        src: S("PART107", "§107.73") },
+        src: S("PART107") },
       { id: "n-temp", value: "120 days", label: "Temporary certificate", cat: "REG",
         detail: "Emailed after IACRA Form 8710-13; permanent card mails later. Carry it when flying.",
         kw: "temporary certificate iacra 8710",

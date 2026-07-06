@@ -37,7 +37,7 @@ export const GRID_DETAILS = {
 };
 
 export const GRID_CAVEAT =
-  "Facility maps show where the FAA CAN pre-authorize — the map itself is not an authorization. You still need LAANC or DroneZone approval in controlled airspace.";
+  "Facility maps show where the FAA CAN pre-authorize — the map itself is not an authorization. You still need LAANC or DroneZone approval in controlled airspace. This grid is illustrative — check the live FAA UAS Facility Map for your actual location before planning or quoting a job.";
 
 export const LAANC_SRC = S("LAANC");
 export const LAANC_FLOW = [

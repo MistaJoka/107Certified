@@ -9,7 +9,7 @@ import { FIELD_CARDS } from "./field.js";
 import { SOURCES } from "./sources.js";
 
 // record: { id, section, cat, title, body, kw }
-const RECORDS = [];
+export const RECORDS = [];
 const add = (r) => RECORDS.push({ kw: "", ...r });
 
 ALL_NUMBERS.forEach((n) =>

@@ -141,6 +141,7 @@ export function SourceDrawer({ src }) {
       PRACTICE GUIDANCE — NOT REGULATION</div>
   );
   const d = SOURCES[src.doc];
+  if (!d) return null;
   return (
     <div style={{ marginTop: 9 }} onClick={(e) => e.stopPropagation()}>
       <button onClick={() => setOpen(!open)} style={{ background: "none", border: "none",

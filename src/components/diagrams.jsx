@@ -97,6 +97,13 @@ export function LegendTile({ sym }) {
         <text x="46" y="74" textAnchor="middle" fill={T.text} style={{ font: `bold 8px ${mono}` }}>724</text>
         <text x="85" y="74" textAnchor="middle" fill={T.dim} style={{ font: `8px ${mono}` }}>(1049)</text>
       </svg>);
+    case "private": return (
+      <svg viewBox="0 0 120 80" style={{ width: "100%", display: "block" }}>
+        {grid}
+        <circle cx="60" cy="40" r="13" fill="none" stroke={T.magenta} strokeWidth="2" />
+        <text x="60" y="45" textAnchor="middle" fill={T.magenta} style={{ font: `bold 13px ${mono}` }}>R</text>
+        <text x="60" y="70" textAnchor="middle" fill={T.dim} style={{ font: `8px ${mono}` }}>(Pvt)</text>
+      </svg>);
     default: return null;
   }
 }

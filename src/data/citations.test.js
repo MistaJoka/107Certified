@@ -7,6 +7,8 @@ import { AIRSPACE_ITEMS, DATABLOCK_SRC } from "./airspace.js";
 import { WX_CARDS, METAR_SRC, TAF_SRC } from "./weather.js";
 import { GRID_DETAILS as AUTH_GRID, TFR_CARDS, NOTAM_SRC, LAANC_SRC } from "./authorization.js";
 import { FIELD_CARDS } from "./field.js";
+import { RECORDS } from "./searchIndex.js";
+import { SECTIONS } from "../theme.js";
 
 const checkSrc = (records, name) => {
   for (const r of records) {
@@ -57,4 +59,15 @@ describe("citation coverage — authorization", () => {
 
 describe("citation coverage — field awareness", () => {
   it("field cards have src or explicit null", () => checkSrc(FIELD_CARDS, "field"));
+});
+
+describe("search index invariants", () => {
+  it("record ids are unique", () => {
+    const ids = RECORDS.map((r) => r.id);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+  it("every record's section is registered", () => {
+    const known = new Set(SECTIONS.map((s) => s.id));
+    for (const r of RECORDS) expect(known.has(r.section), r.id).toBe(true);
+  });
 });
