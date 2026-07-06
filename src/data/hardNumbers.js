@@ -86,7 +86,7 @@ export const NUMBER_GROUPS = [
       { id: "n-temp", value: "120 days", label: "Temporary certificate", cat: "REG",
         detail: "Emailed after IACRA Form 8710-13; permanent card mails later. Carry it when flying.",
         kw: "temporary certificate iacra 8710",
-        src: S("PART107") },
+        src: S("PART107", "§107.64") },
       { id: "n-age", value: "16 yrs", label: "Min age for the certificate", cat: "REG",
         detail: "13+ to register a drone; 16+ to hold a remote pilot certificate.",
         kw: "age minimum sixteen",

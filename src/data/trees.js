@@ -85,8 +85,8 @@ export const TREES = [
         src: S("PART107", "§107.39") },
       no_cat3: { verdict: "NO",
         text: "Category 3 never allows sustained flight over open-air assemblies. Reroute around the crowd.",
-        rule: "107.145 — Cat 3 prohibits operations over open-air assemblies.",
-        src: S("PART107", "§107.145") },
+        rule: "107.125 — Cat 3 prohibits operations over open-air assemblies.",
+        src: S("PART107", "§107.125") },
     },
   },
   {
