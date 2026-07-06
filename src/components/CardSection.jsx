@@ -1,5 +1,6 @@
 import { T, mono } from "../theme.js";
 import { CARD_SECTIONS, OOP_MATRIX, OOP_CARDS, CERT_STEPS } from "../data/cards.js";
+import { FIELD_BANNER, FIELD_CARDS } from "../data/field.js";
 import { TwilightSVG, RunwayCompassSVG, PatternLegsSVG } from "./diagrams.jsx";
 import { SectionLabel, Reveal, Panel, Hi, useFocusFlash, SourceDrawer } from "./atoms.jsx";
 
@@ -76,6 +77,16 @@ export default function CardSection({ sectionId, focusId }) {
       <div style={{ fontSize: 12.5, color: T.dim, lineHeight: 1.5, padding: "10px 2px 14px" }}>
         Zero to certificated remote pilot, in order.</div>
       <CertPath />
+    </>
+  );
+
+  if (sectionId === "field") return (
+    <>
+      <div style={{ margin: "10px 0 4px", fontFamily: mono, fontSize: 11.5, lineHeight: 1.6,
+        color: T.amber, background: T.amber + "12", border: `1px solid ${T.amber}44`,
+        borderRadius: 8, padding: "10px 12px" }}>{FIELD_BANNER}</div>
+      <SectionLabel>ON THE GROUND</SectionLabel>
+      {cardList(FIELD_CARDS, focusId)}
     </>
   );
 

@@ -5,6 +5,7 @@ import { AIRSPACE_ITEMS, DATABLOCK_TOKENS } from "./airspace.js";
 import { METAR_TOKENS, TAF_TOKENS, WX_CARDS } from "./weather.js";
 import { CARD_SECTIONS, OOP_MATRIX, OOP_CARDS, CERT_STEPS } from "./cards.js";
 import { GRID_DETAILS, LAANC_FLOW, TFR_CARDS, NOTAM_TOKENS } from "./authorization.js";
+import { FIELD_CARDS } from "./field.js";
 import { SOURCES } from "./sources.js";
 
 // record: { id, section, cat, title, body, kw }
@@ -65,6 +66,10 @@ TFR_CARDS.forEach((c) =>
 NOTAM_TOKENS.forEach((tk, i) =>
   add({ id: `notam-${i}`, section: "authorization", cat: "CHART",
     title: `NOTAM ${tk.t} — ${tk.label}`, body: tk.m, kw: "notam decode read" }));
+
+FIELD_CARDS.forEach((c) =>
+  add({ id: c.id, section: "field", cat: c.cat, title: c.q,
+    body: `${c.a} ${c.rule || ""}`, kw: c.kw }));
 
 export function search(query) {
   const q = query.trim().toLowerCase();

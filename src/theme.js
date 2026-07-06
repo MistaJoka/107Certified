@@ -38,6 +38,8 @@ export const SECTIONS = [
     blurb: "Category 1–4 matrix — what each allows" },
   { id: "rightofway",  title: "Rules of the Air",   cat: "REG",   glyph: "✈",
     blurb: "Right-of-way, careless ops, VO duties, waivers" },
+  { id: "field", title: "Field Awareness", cat: "OPS", glyph: "⚑",
+    blurb: "FAA-legal ≠ location-approved: local rules, privacy, police" },
   { id: "emergency",   title: "Emergency / Accident", cat: "OPS", glyph: "▲",
     blurb: "What to do, when to report, what counts" },
   { id: "cert",        title: "Certification Path", cat: "REG",   glyph: "➤",

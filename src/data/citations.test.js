@@ -6,6 +6,7 @@ import { CARD_SECTIONS, OOP_MATRIX, OOP_CARDS, CERT_STEPS } from "./cards.js";
 import { AIRSPACE_ITEMS, DATABLOCK_SRC } from "./airspace.js";
 import { WX_CARDS, METAR_SRC, TAF_SRC } from "./weather.js";
 import { GRID_DETAILS as AUTH_GRID, TFR_CARDS, NOTAM_SRC, LAANC_SRC } from "./authorization.js";
+import { FIELD_CARDS } from "./field.js";
 
 const checkSrc = (records, name) => {
   for (const r of records) {
@@ -52,4 +53,8 @@ describe("citation coverage — authorization", () => {
     expect(SOURCES[NOTAM_SRC.doc]).toBeTruthy();
     expect(SOURCES[LAANC_SRC.doc]).toBeTruthy();
   });
+});
+
+describe("citation coverage — field awareness", () => {
+  it("field cards have src or explicit null", () => checkSrc(FIELD_CARDS, "field"));
 });
