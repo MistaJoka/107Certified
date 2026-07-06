@@ -66,6 +66,28 @@ export function LegendTile({ sym }) {
         <text x="95" y="72" textAnchor="middle" fill={T.text} style={{ font: `bold 8px ${mono}` }}>1049</text>
         <text x="95" y="79" textAnchor="middle" fill={T.dim} style={{ font: `8px ${mono}` }}>(305)</text>
       </svg>);
+    case "latlong": return (
+      <svg viewBox="0 0 120 80" style={{ width: "100%", display: "block" }}>
+        {grid}
+        <line x1="0" y1="46" x2="120" y2="46" stroke={T.text} strokeWidth="1.2" />
+        {Array.from({ length: 14 }, (_, i) => 8 + i * 8).map((x, i) => (
+          <line key={x} x1={x} y1={i % 5 === 0 ? 39 : 42} x2={x} y2="46" stroke={T.text} strokeWidth="1" />
+        ))}
+        <line x1="88" y1="0" x2="88" y2="80" stroke={T.text} strokeWidth="1.2" />
+        <text x="8" y="34" fill={T.text} style={{ font: `bold 10px ${mono}` }}>38°</text>
+        <text x="94" y="72" fill={T.dim} style={{ font: `9px ${mono}` }}>30'</text>
+      </svg>);
+    case "stack": return (
+      <svg viewBox="0 0 120 80" style={{ width: "100%", display: "block" }}>
+        <rect x="0" y="4" width="120" height="22" fill={T.purple + "33"} />
+        <rect x="0" y="26" width="120" height="34" fill={T.blue + "22"} />
+        <rect x="0" y="60" width="120" height="16" fill={T.green + "22"} />
+        <line x1="0" y1="26" x2="120" y2="26" stroke={T.purple} strokeWidth="1" />
+        <line x1="0" y1="60" x2="120" y2="60" stroke={T.green} strokeWidth="1" />
+        <text x="6" y="19" fill={T.purple} style={{ font: `bold 10px ${mono}` }}>A 18,000</text>
+        <text x="6" y="46" fill={T.blue} style={{ font: `bold 10px ${mono}` }}>E</text>
+        <text x="6" y="73" fill={T.green} style={{ font: `bold 10px ${mono}` }}>G ← you</text>
+      </svg>);
     default: return null;
   }
 }

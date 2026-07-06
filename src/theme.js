@@ -34,6 +34,8 @@ export const SECTIONS = [
     blurb: "Standard · broadcast module · FRIA" },
   { id: "oop",         title: "Ops Over People",    cat: "REG",   glyph: "⚉",
     blurb: "Category 1–4 matrix — what each allows" },
+  { id: "rightofway",  title: "Rules of the Air",   cat: "REG",   glyph: "✈",
+    blurb: "Right-of-way, careless ops, VO duties, waivers" },
   { id: "emergency",   title: "Emergency / Accident", cat: "OPS", glyph: "▲",
     blurb: "What to do, when to report, what counts" },
   { id: "cert",        title: "Certification Path", cat: "REG",   glyph: "➤",
