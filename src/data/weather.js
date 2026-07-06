@@ -1,0 +1,56 @@
+// ── WEATHER DECODER — a METAR and TAF you can tap apart ────────────
+
+export const METAR_TOKENS = [
+  { t: "KMIA", label: "Station", m: "4-letter ICAO ID — K + Miami Intl." },
+  { t: "051253Z", label: "Time", m: "Day 05 of the month, 12:53 Zulu (UTC). METARs are hourly observations." },
+  { t: "18012G20KT", label: "Wind", m: "From 180° true at 12 kt, Gusting 20 kt. First 3 digits = direction, next 2 = speed." },
+  { t: "6SM", label: "Visibility", m: "6 statute miles. Your minimum is 3 SM." },
+  { t: "-RA", label: "Weather", m: "Light rain. '-' light, no sign moderate, '+' heavy. TS = thunderstorm, BR = mist, HZ = haze." },
+  { t: "BKN008", label: "Clouds", m: "Broken layer at 800 ft (hundreds of ft AGL). THIS is the ceiling — lowest BKN or OVC." },
+  { t: "OVC015", label: "Clouds", m: "Overcast at 1,500 ft. FEW/SCT layers never count as a ceiling." },
+  { t: "24/22", label: "Temp / dew", m: "24°C / dewpoint 22°C. Spread ≤2°C and converging → fog is imminent." },
+  { t: "A2992", label: "Altimeter", m: "29.92 inHg sea-level pressure setting." },
+];
+
+export const TAF_TOKENS = [
+  { t: "TAF KMIA", label: "Forecast", m: "Terminal Aerodrome Forecast — 24–30 hr, valid ~5 SM around the airport, METAR code format." },
+  { t: "051130Z", label: "Issued", m: "Issued day 05, 11:30 Z." },
+  { t: "0512/0612", label: "Valid", m: "Valid from day 05 12:00 Z to day 06 12:00 Z." },
+  { t: "17010KT", label: "Wind", m: "From 170° at 10 kt." },
+  { t: "P6SM", label: "Visibility", m: "P = 'plus' — greater than 6 statute miles." },
+  { t: "SCT025", label: "Clouds", m: "Scattered at 2,500 ft — not a ceiling." },
+  { t: "FM052000", label: "FM group", m: "FroM day 05 20:00 Z: a rapid, lasting change — everything after replaces the forecast." },
+  { t: "20015G25KT", label: "Wind", m: "Becomes 200° at 15 gusting 25 kt." },
+  { t: "4SM SHRA", label: "Vis + wx", m: "4 SM in rain showers. Legal (≥3 SM) but marginal." },
+  { t: "BKN012", label: "Ceiling", m: "Broken 1,200 ft — check your cloud clearance: 500 below means staying under 700 ft." },
+  { t: "TEMPO 0521/0524", label: "TEMPO", m: "Temporary fluctuations (<1 hr at a time) between day 05 21 Z and 24 Z." },
+  { t: "2SM +TSRA", label: "No-go", m: "2 SM in heavy thunderstorms + rain — below minimums AND a 20 NM avoidance problem." },
+];
+
+// Quick-reference cards below the decoders (tap to reveal)
+export const WX_CARDS = [
+  { id: "wx-ceiling", cat: "WX", q: "What counts as a 'ceiling'?",
+    a: "The lowest BROKEN or OVERCAST layer. FEW and SCT don't count.",
+    rule: "BKN008 = ceiling 800 ft AGL.", kw: "ceiling broken overcast bkn ovc" },
+  { id: "wx-sources", cat: "WX", q: "METAR vs TAF vs PIREP?",
+    a: "METAR = observation NOW (hourly). TAF = forecast (24–30 hr, airport 5 SM). PIREP = the only source of actual observed in-flight conditions (UA routine / UUA urgent).",
+    rule: "aviationweather.gov and 1800wxbrief are the official sources.", kw: "metar taf pirep observation forecast" },
+  { id: "wx-airmet", cat: "WX", q: "AIRMET Sierra / Tango / Zulu?",
+    a: "Sierra = IFR & mountain obscuration · Tango = turbulence · Zulu = icing. All moderate hazards.",
+    rule: "SIGMET = severe non-convective · Convective SIGMET = thunderstorms.", kw: "airmet sigmet sierra tango zulu icing turbulence" },
+  { id: "wx-stable", cat: "WX", q: "Stable vs unstable air?",
+    a: "Stable: smooth air, POOR visibility, stratus clouds. Unstable: turbulent, GOOD visibility, cumulus.",
+    rule: "Temperature inversion = very stable = smooth but haze/smog trapped.", kw: "stable unstable stratus cumulus inversion visibility" },
+  { id: "wx-ts", cat: "WX", q: "Thunderstorm ingredients & worst stage?",
+    a: "Moisture + unstable air + lifting force. Stages: cumulus → MATURE (rain begins, strongest drafts) → dissipating.",
+    rule: "Avoid by 20 NM. Microbursts: downdrafts to 6,000 fpm, ~15 min lifespan.", kw: "thunderstorm mature cumulus microburst lifting" },
+  { id: "wx-fog", cat: "WX", q: "The four fog types?",
+    a: "Radiation (clear calm nights) · Advection (warm moist air over cool surface — coastal FL classic) · Steam · Upslope.",
+    rule: "Temp/dewpoint spread ≤2°C and converging = fog imminent.", kw: "fog radiation advection steam upslope dewpoint" },
+  { id: "wx-da", cat: "WX", q: "Density altitude — what hurts performance?",
+    a: "High, hot, humid: air gets less dense, lift and thrust drop.",
+    rule: "Same killer for drones as for Cessnas. Frost/ice disrupts lift even in thin layers.", kw: "density altitude high hot humid performance frost" },
+  { id: "wx-shear", cat: "WX", q: "Where is wind shear worst?",
+    a: "Any level, any direction — worst near thunderstorms and temperature inversions.",
+    rule: "Low-level shear near a storm can exceed any sUAS control authority.", kw: "wind shear inversion low level" },
+];

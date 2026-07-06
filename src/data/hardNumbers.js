@@ -1,0 +1,111 @@
+// ── HARD NUMBERS — the values the FAA expects cold ─────────────────
+// { id, value, label, detail, cat, kw } — kw feeds global search
+
+export const NUMBER_GROUPS = [
+  {
+    group: "Flight limits",
+    items: [
+      { id: "n-alt", value: "400 ft", label: "Max altitude (AGL)", cat: "REG",
+        detail: "Higher only within a 400 ft radius of a structure — then up to 400 ft above its top.",
+        kw: "altitude ceiling structure tower inspection agl" },
+      { id: "n-spd", value: "100 mph", label: "Max groundspeed", cat: "REG",
+        detail: "= 87 knots. Groundspeed, not airspeed — tailwind counts against you.",
+        kw: "speed knots 87" },
+      { id: "n-wt", value: "< 55 lb", label: "Max takeoff weight", cat: "REG",
+        detail: "Everything on board counts: payload, external load, cargo. 55 lb or more = not Part 107.",
+        kw: "weight pounds payload" },
+      { id: "n-vlos", value: "VLOS", label: "Visual line of sight", cat: "REG",
+        detail: "Remote PIC must be ABLE to see the aircraft unaided (glasses OK). A visual observer never replaces this.",
+        kw: "see unaided visual observer 107.31 107.33" },
+    ],
+  },
+  {
+    group: "Weather minimums",
+    items: [
+      { id: "n-vis", value: "3 SM", label: "Min flight visibility", cat: "WX",
+        detail: "Statute miles, from the control station.",
+        kw: "visibility statute miles minimum" },
+      { id: "n-cloud", value: "500 / 2,000", label: "Cloud clearance (ft)", cat: "WX",
+        detail: "Stay 500 ft below and 2,000 ft horizontal from clouds.",
+        kw: "cloud clearance below horizontal" },
+      { id: "n-ts", value: "20 NM", label: "Thunderstorm avoidance", cat: "WX",
+        detail: "Hail and severe turbulence eject well outside the cell.",
+        kw: "thunderstorm hail avoid" },
+    ],
+  },
+  {
+    group: "Deadlines & paperwork",
+    items: [
+      { id: "n-accident", value: "10 days", label: "Accident report deadline", cat: "REG",
+        detail: "Report to the FAA when there's serious injury / loss of consciousness, or >$500 damage to property other than the drone (107.9).",
+        kw: "accident report injury damage 500 107.9" },
+      { id: "n-recurrent", value: "24 mo", label: "Recurrent training cycle", cat: "REG",
+        detail: "Free online training every 24 calendar months keeps you current.",
+        kw: "recurrent currency training months" },
+      { id: "n-address", value: "30 days", label: "Address change notice", cat: "REG",
+        detail: "Notify the FAA within 30 days of moving.",
+        kw: "address change move faa" },
+      { id: "n-reg", value: "$5", label: "Drone registration", cat: "REG",
+        detail: "FAADroneZone, valid 3 years, must be 13+ to register. Mark the number on the aircraft.",
+        kw: "registration dronezone mark 13" },
+    ],
+  },
+  {
+    group: "Alcohol & physiology",
+    items: [
+      { id: "n-bac", value: "0.04", label: "Max blood alcohol", cat: "OPS",
+        detail: "Plus 8 hours bottle-to-throttle. Refusing a drug/alcohol test = 1-year certificate denial.",
+        kw: "alcohol bac drinking bottle throttle 8 hours drug test" },
+      { id: "n-dark", value: "~30 min", label: "Dark adaptation", cat: "OPS",
+        detail: "One bright light exposure resets it in seconds. Use off-center viewing at night (rods, not cones).",
+        kw: "night vision dark adaptation rods cones" },
+    ],
+  },
+  {
+    group: "Test & certificate",
+    items: [
+      { id: "n-test", value: "60 Q / 70%", label: "The knowledge test", cat: "REG",
+        detail: "$175 at a PSI center, 2 hours, chart supplement provided. Fail → 14-day wait (and full fee again).",
+        kw: "exam test psi 175 questions pass fail retest 14" },
+      { id: "n-temp", value: "120 days", label: "Temporary certificate", cat: "REG",
+        detail: "Emailed after IACRA Form 8710-13; permanent card mails later. Carry it when flying.",
+        kw: "temporary certificate iacra 8710" },
+      { id: "n-age", value: "16 yrs", label: "Min age for the certificate", cat: "REG",
+        detail: "13+ to register a drone; 16+ to hold a remote pilot certificate.",
+        kw: "age minimum sixteen" },
+    ],
+  },
+  {
+    group: "Airspace & night",
+    items: [
+      { id: "n-efloor", value: "700 / 1,200", label: "Class E floors (AGL)", cat: "CHART",
+        detail: "Shaded magenta = E starts at 700 AGL. No shading = 1,200 AGL. Dashed magenta = E to the surface (authorization!).",
+        kw: "class e floor shaded magenta vignette" },
+      { id: "n-stadium", value: "3 NM / 3,000", label: "Stadium TFR", cat: "CHART",
+        detail: "1 hr before to 1 hr after MLB / NFL / NCAA D1 / NASCAR events.",
+        kw: "stadium tfr sporting event" },
+      { id: "n-light", value: "3 SM", label: "Anti-collision light", cat: "REG",
+        detail: "Visible 3 SM with sufficient flash rate — required at night AND during civil twilight (107.29).",
+        kw: "night light anti-collision strobe twilight 107.29" },
+      { id: "n-twilight", value: "30 min", label: "Civil twilight window", cat: "REG",
+        detail: "30 min before sunrise / 30 min after sunset (Alaska differs).",
+        kw: "civil twilight sunrise sunset alaska" },
+    ],
+  },
+  {
+    group: "Performance & radio",
+    items: [
+      { id: "n-load", value: "2G @ 60°", label: "Load factor in a bank", cat: "LOAD",
+        detail: "Stall speed rises with √load factor — weight and bank move WHEN you stall, AoA is WHY.",
+        kw: "load factor bank stall g" },
+      { id: "n-vhf", value: "118–137", label: "Aviation VHF band (MHz)", cat: "OPS",
+        detail: "118.0–136.975 MHz. CTAF lives in the chart's airport data block.",
+        kw: "vhf radio frequency ctaf megahertz" },
+      { id: "n-rwy", value: "÷ 10", label: "Runway numbers", cat: "OPS",
+        detail: "Magnetic heading ÷ 10 — runway 27 = 270°. Opposite end differs by 18.",
+        kw: "runway heading magnetic compass 27" },
+    ],
+  },
+];
+
+export const ALL_NUMBERS = NUMBER_GROUPS.flatMap((g) => g.items);
