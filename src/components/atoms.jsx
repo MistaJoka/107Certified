@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { T, CAT, mono } from "../theme.js";
+import { SOURCES } from "../data/sources.js";
 
 export const Tag = ({ cat }) => (
   <span style={{ fontFamily: mono, fontSize: 10, letterSpacing: 1, color: CAT[cat].c,
@@ -65,7 +66,7 @@ export function useFocusFlash(focusId) {
 }
 
 // answer card: question up front, tap to reveal answer + rule
-export function Reveal({ id, cat, q, a, rule, open: forceOpen }) {
+export function Reveal({ id, cat, q, a, rule, src, open: forceOpen }) {
   const [open, setOpen] = useState(!!forceOpen);
   const c = CAT[cat].c;
   return (
@@ -84,6 +85,7 @@ export function Reveal({ id, cat, q, a, rule, open: forceOpen }) {
             color: c, background: c + "12", borderLeft: `2px solid ${c}`,
             padding: "6px 9px", borderRadius: "0 4px 4px 0" }}>
             <Hi text={rule} base={c} /></div>}
+          <SourceDrawer src={src} />
         </div>
       )}
     </div>
@@ -95,3 +97,66 @@ export const Panel = ({ children, style }) => (
   <div style={{ background: T.panel, border: `1px solid ${T.line}`, borderRadius: 8,
     padding: "12px 14px", marginBottom: 8, ...style }}>{children}</div>
 );
+
+// tap-a-token decoder strip (METAR, TAF, NOTAM, airport data block)
+export function TokenStrip({ tokens, prefix, color, src }) {
+  const [sel, setSel] = useState(null);
+  return (
+    <Panel style={{ padding: "13px 14px 14px" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 4 }}>
+        {tokens.map((tk, i) => {
+          const active = sel === i;
+          return (
+            <button key={i} id={`${prefix}-${i}`} onClick={() => setSel(active ? null : i)}
+              style={{ fontFamily: mono, fontSize: 13.5, fontWeight: 700, letterSpacing: 0.5,
+                color: active ? T.ink : color, cursor: "pointer", borderRadius: 5,
+                background: active ? color : color + "14",
+                border: `1px solid ${color}${active ? "" : "44"}`, padding: "6px 8px" }}>{tk.t}</button>
+          );
+        })}
+      </div>
+      {sel !== null ? (
+        <div style={{ marginTop: 10, borderTop: `1px solid ${T.line}`, paddingTop: 10 }}>
+          <div style={{ fontFamily: mono, fontSize: 10.5, letterSpacing: 1.5, color, marginBottom: 5 }}>
+            {tokens[sel].label.toUpperCase()}</div>
+          <div style={{ fontSize: 13.5, lineHeight: 1.55 }}>
+            <Hi text={tokens[sel].m} base={T.text} /></div>
+        </div>
+      ) : (
+        <div style={{ fontSize: 11.5, color: T.dim, marginTop: 6 }}>tap any token ↑</div>
+      )}
+      <SourceDrawer src={src} />
+    </Panel>
+  );
+}
+
+// citation drawer — src: {doc, ref?} | null (practice guidance) | undefined (hidden)
+export function SourceDrawer({ src }) {
+  const [open, setOpen] = useState(false);
+  if (src === undefined) return null;
+  if (src === null) return (
+    <div style={{ marginTop: 9, fontFamily: mono, fontSize: 9.5, letterSpacing: 1.2,
+      color: T.dim, border: `1px dashed ${T.line}`, borderRadius: 4,
+      padding: "3px 7px", display: "inline-block" }}>
+      PRACTICE GUIDANCE — NOT REGULATION</div>
+  );
+  const d = SOURCES[src.doc];
+  return (
+    <div style={{ marginTop: 9 }} onClick={(e) => e.stopPropagation()}>
+      <button onClick={() => setOpen(!open)} style={{ background: "none", border: "none",
+        padding: 0, cursor: "pointer", fontFamily: mono, fontSize: 10,
+        letterSpacing: 1.2, color: T.dim }}>
+        SOURCE {src.ref ? `· ${src.ref} ` : ""}{open ? "▾" : "▸"}</button>
+      {open && (
+        <div style={{ marginTop: 6, fontSize: 11.5, lineHeight: 1.5, color: T.dim,
+          borderLeft: `2px solid ${T.line}`, paddingLeft: 8 }}>
+          <a href={d.url} target="_blank" rel="noopener noreferrer"
+            style={{ color: T.blue, textDecoration: "none" }}>{d.title} ↗</a>
+          {src.ref && <span> · {src.ref}</span>}
+          <div style={{ fontFamily: mono, fontSize: 9.5, marginTop: 2 }}>
+            last checked {d.lastChecked}</div>
+        </div>
+      )}
+    </div>
+  );
+}
