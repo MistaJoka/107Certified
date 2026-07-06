@@ -85,7 +85,7 @@ export default function Performance({ focusId }) {
       <SectionLabel color={LOAD_C}>DENSITY ALTITUDE — PICK THE DAY</SectionLabel>
       <DensityAltCalc />
       <SectionLabel>THE THEORY</SectionLabel>
-      {CARD_SECTIONS.performance.map((c) => (
+      {(CARD_SECTIONS.performance || []).map((c) => (
         <Reveal key={c.id} {...c} open={focusId === c.id} />
       ))}
     </div>
