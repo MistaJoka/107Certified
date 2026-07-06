@@ -7,6 +7,7 @@ import { CARD_SECTIONS, OOP_MATRIX, OOP_CARDS, CERT_STEPS } from "./cards.js";
 import { GRID_DETAILS, LAANC_FLOW, TFR_CARDS, NOTAM_TOKENS } from "./authorization.js";
 import { FIELD_CARDS } from "./field.js";
 import { SOURCES } from "./sources.js";
+import { LOADFACTOR_ID, DA_ID, LOAD_COPY } from "./performance.js";
 
 // record: { id, section, cat, title, body, kw }
 export const RECORDS = [];
@@ -70,6 +71,15 @@ NOTAM_TOKENS.forEach((tk, i) =>
 FIELD_CARDS.forEach((c) =>
   add({ id: c.id, section: "field", cat: c.cat, title: c.q,
     body: `${c.a} ${c.rule || ""}`, kw: c.kw }));
+
+add({ id: LOADFACTOR_ID, section: "performance", cat: "LOAD",
+  title: "Load factor & stall speed vs bank angle",
+  body: `${LOAD_COPY.why} ${LOAD_COPY.tip}`,
+  kw: "load factor stall speed bank angle 60 degrees 2 g turn accelerated" });
+add({ id: DA_ID, section: "performance", cat: "LOAD",
+  title: "Density altitude — performance",
+  body: "High, hot, and humid raises density altitude: longer takeoff, reduced climb and thrust in thin air.",
+  kw: "density altitude high hot humid performance takeoff climb thin air" });
 
 export function search(query) {
   const q = query.trim().toLowerCase();
