@@ -5,6 +5,7 @@ import { TREES } from "./trees.js";
 import { CARD_SECTIONS, OOP_MATRIX, OOP_CARDS, CERT_STEPS } from "./cards.js";
 import { AIRSPACE_ITEMS } from "./airspace.js";
 import { WX_CARDS, METAR_SRC, TAF_SRC } from "./weather.js";
+import { GRID_DETAILS as AUTH_GRID, TFR_CARDS, NOTAM_SRC, LAANC_SRC } from "./authorization.js";
 
 const checkSrc = (records, name) => {
   for (const r of records) {
@@ -38,5 +39,14 @@ describe("citation coverage — decoders", () => {
     checkSrc(WX_CARDS, "wxCards");
     expect(SOURCES[METAR_SRC.doc]).toBeTruthy();
     expect(SOURCES[TAF_SRC.doc]).toBeTruthy();
+  });
+});
+
+describe("citation coverage — authorization", () => {
+  it("grid, tfr, strips", () => {
+    checkSrc(Object.values(AUTH_GRID), "authGrid");
+    checkSrc(TFR_CARDS, "tfrCards");
+    expect(SOURCES[NOTAM_SRC.doc]).toBeTruthy();
+    expect(SOURCES[LAANC_SRC.doc]).toBeTruthy();
   });
 });

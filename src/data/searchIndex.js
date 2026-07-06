@@ -4,6 +4,7 @@ import { TREES } from "./trees.js";
 import { AIRSPACE_ITEMS } from "./airspace.js";
 import { METAR_TOKENS, TAF_TOKENS, WX_CARDS } from "./weather.js";
 import { CARD_SECTIONS, OOP_MATRIX, OOP_CARDS, CERT_STEPS } from "./cards.js";
+import { GRID_DETAILS, LAANC_FLOW, TFR_CARDS, NOTAM_TOKENS } from "./authorization.js";
 
 // record: { id, section, cat, title, body, kw }
 const RECORDS = [];
@@ -39,6 +40,22 @@ OOP_CARDS.forEach((c) =>
 
 CERT_STEPS.forEach((s) =>
   add({ id: s.id, section: "cert", cat: "REG", title: `Step ${s.step}: ${s.title}`, body: s.detail, kw: s.kw }));
+
+Object.entries(GRID_DETAILS).forEach(([v, d]) =>
+  add({ id: `auth-grid-${v}`, section: "authorization", cat: "CHART",
+    title: `Facility map grid "${v}" — what it means`,
+    body: `${d.meaning} ${d.laanc} ${d.coordination}`,
+    kw: "uas facility map grid ceiling laanc altitude zero" }));
+LAANC_FLOW.forEach((s, i) =>
+  add({ id: `laanc-${i}`, section: "authorization", cat: "CHART",
+    title: `Authorization: ${s.cond}`, body: s.action,
+    kw: "laanc dronezone further coordination authorization instant" }));
+TFR_CARDS.forEach((c) =>
+  add({ id: c.id, section: "authorization", cat: c.cat, title: c.q,
+    body: `${c.a} ${c.rule || ""}`, kw: c.kw }));
+NOTAM_TOKENS.forEach((tk, i) =>
+  add({ id: `notam-${i}`, section: "authorization", cat: "CHART",
+    title: `NOTAM ${tk.t} — ${tk.label}`, body: tk.m, kw: "notam decode read" }));
 
 export function search(query) {
   const q = query.trim().toLowerCase();

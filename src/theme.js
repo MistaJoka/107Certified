@@ -24,6 +24,8 @@ export const SECTIONS = [
     blurb: "Yes/no decision trees for the calls you actually make" },
   { id: "airspace",    title: "Airspace Decoder",   cat: "CHART", glyph: "◎",
     blurb: "Tap a chart symbol → class, ceiling, authorization" },
+  { id: "authorization", title: "Airspace Authorization", cat: "CHART", glyph: "⌗",
+    blurb: "Facility map grids · LAANC · TFRs · NOTAM decoder" },
   { id: "weather",     title: "Weather Decoder",    cat: "WX",    glyph: "☁",
     blurb: "Tap a raw METAR / TAF apart, token by token" },
   { id: "night",       title: "Night Ops",          cat: "REG",   glyph: "☾",
