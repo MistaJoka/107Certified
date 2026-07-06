@@ -7,10 +7,11 @@ import AirspaceDecoder from "./components/AirspaceDecoder.jsx";
 import WeatherDecoder from "./components/WeatherDecoder.jsx";
 import Authorization from "./components/Authorization.jsx";
 import CardSection from "./components/CardSection.jsx";
+import Library from "./components/Library.jsx";
 import { BackBar } from "./components/atoms.jsx";
 
 const VIEWS = { numbers: HardNumbers, canifly: CanIFly, airspace: AirspaceDecoder,
-  weather: WeatherDecoder, authorization: Authorization };
+  weather: WeatherDecoder, authorization: Authorization, library: Library };
 
 // "#/section/entryId" → { sectionId, focusId }
 function parseHash() {

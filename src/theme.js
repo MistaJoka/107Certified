@@ -48,4 +48,6 @@ export const SECTIONS = [
     blurb: "MAIIR, DECIDE, PAVE, IMSAFE, physiology" },
   { id: "maintenance", title: "Maintenance",        cat: "OPS",   glyph: "⚙",
     blurb: "Preflight, batteries, firmware, logs" },
+  { id: "library", title: "FAA Library", cat: "REG", glyph: "≡",
+    blurb: "The official documents every answer here cites" },
 ];

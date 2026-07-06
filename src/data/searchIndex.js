@@ -5,6 +5,7 @@ import { AIRSPACE_ITEMS, DATABLOCK_TOKENS } from "./airspace.js";
 import { METAR_TOKENS, TAF_TOKENS, WX_CARDS } from "./weather.js";
 import { CARD_SECTIONS, OOP_MATRIX, OOP_CARDS, CERT_STEPS } from "./cards.js";
 import { GRID_DETAILS, LAANC_FLOW, TFR_CARDS, NOTAM_TOKENS } from "./authorization.js";
+import { SOURCES } from "./sources.js";
 
 // record: { id, section, cat, title, body, kw }
 const RECORDS = [];
@@ -44,6 +45,10 @@ OOP_CARDS.forEach((c) =>
 
 CERT_STEPS.forEach((s) =>
   add({ id: s.id, section: "cert", cat: "REG", title: `Step ${s.step}: ${s.title}`, body: s.detail, kw: s.kw }));
+
+Object.entries(SOURCES).forEach(([key, s]) =>
+  add({ id: `lib-${key.toLowerCase()}`, section: "library", cat: "REG",
+    title: s.title, body: s.use, kw: "faa official source document library reference" }));
 
 Object.entries(GRID_DETAILS).forEach(([v, d]) =>
   add({ id: `auth-grid-${v}`, section: "authorization", cat: "CHART",
