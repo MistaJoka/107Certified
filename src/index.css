@@ -1,0 +1,4 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { background: #0D141F; color-scheme: dark; -webkit-font-smoothing: antialiased; }
+button { font: inherit; }
