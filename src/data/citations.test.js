@@ -3,6 +3,8 @@ import { SOURCES } from "./sources.js";
 import { ALL_NUMBERS } from "./hardNumbers.js";
 import { TREES } from "./trees.js";
 import { CARD_SECTIONS, OOP_MATRIX, OOP_CARDS, CERT_STEPS } from "./cards.js";
+import { AIRSPACE_ITEMS } from "./airspace.js";
+import { WX_CARDS, METAR_SRC, TAF_SRC } from "./weather.js";
 
 const checkSrc = (records, name) => {
   for (const r of records) {
@@ -27,5 +29,14 @@ describe("citation coverage — cards", () => {
     checkSrc(OOP_MATRIX, "oopMatrix");
     checkSrc(OOP_CARDS, "oopCards");
     checkSrc(CERT_STEPS, "certSteps");
+  });
+});
+
+describe("citation coverage — decoders", () => {
+  it("airspace items", () => checkSrc(AIRSPACE_ITEMS, "airspace"));
+  it("weather cards + strip sources", () => {
+    checkSrc(WX_CARDS, "wxCards");
+    expect(SOURCES[METAR_SRC.doc]).toBeTruthy();
+    expect(SOURCES[TAF_SRC.doc]).toBeTruthy();
   });
 });

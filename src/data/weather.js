@@ -1,5 +1,7 @@
 // ── WEATHER DECODER — a METAR and TAF you can tap apart ────────────
 
+import { S } from "./sources.js";
+
 export const METAR_TOKENS = [
   { t: "KMIA", label: "Station", m: "4-letter ICAO ID — K + Miami Intl." },
   { t: "051253Z", label: "Time", m: "Day 05 of the month, 12:53 Zulu (UTC). METARs are hourly observations." },
@@ -27,36 +29,51 @@ export const TAF_TOKENS = [
   { t: "2SM +TSRA", label: "No-go", m: "2 SM in heavy thunderstorms + rain — below minimums AND a 20 NM avoidance problem." },
 ];
 
+// Strip-level citations — individual tokens are parts of one example
+// observation, cited once at the panel level.
+export const METAR_SRC = S("AWC");
+export const TAF_SRC = S("AWC");
+
 // Quick-reference cards below the decoders (tap to reveal)
 export const WX_CARDS = [
   { id: "wx-ceiling", cat: "WX", q: "What counts as a 'ceiling'?",
     a: "The lowest BROKEN or OVERCAST layer. FEW and SCT don't count.",
-    rule: "BKN008 = ceiling 800 ft AGL.", kw: "ceiling broken overcast bkn ovc" },
+    rule: "BKN008 = ceiling 800 ft AGL.", kw: "ceiling broken overcast bkn ovc",
+    src: S("PHAK") },
   { id: "wx-sources", cat: "WX", q: "METAR vs TAF vs PIREP?",
     a: "METAR = observation NOW (hourly). TAF = forecast (24–30 hr, airport 5 SM). PIREP = the only source of actual observed in-flight conditions (UA routine / UUA urgent).",
-    rule: "aviationweather.gov and 1800wxbrief are the official sources.", kw: "metar taf pirep observation forecast" },
+    rule: "aviationweather.gov and 1800wxbrief are the official sources.", kw: "metar taf pirep observation forecast",
+    src: S("AWC") },
   { id: "wx-airmet", cat: "WX", q: "AIRMET Sierra / Tango / Zulu?",
     a: "Sierra = IFR & mountain obscuration · Tango = turbulence · Zulu = icing. All moderate hazards.",
-    rule: "SIGMET = severe non-convective · Convective SIGMET = thunderstorms.", kw: "airmet sigmet sierra tango zulu icing turbulence" },
+    rule: "SIGMET = severe non-convective · Convective SIGMET = thunderstorms.", kw: "airmet sigmet sierra tango zulu icing turbulence",
+    src: S("AWC") },
   { id: "wx-stable", cat: "WX", q: "Stable vs unstable air?",
     a: "Stable: smooth air, POOR visibility, stratus clouds. Unstable: turbulent, GOOD visibility, cumulus.",
-    rule: "Temperature inversion = very stable = smooth but haze/smog trapped.", kw: "stable unstable stratus cumulus inversion visibility" },
+    rule: "Temperature inversion = very stable = smooth but haze/smog trapped.", kw: "stable unstable stratus cumulus inversion visibility",
+    src: S("PHAK") },
   { id: "wx-ts", cat: "WX", q: "Thunderstorm ingredients & worst stage?",
     a: "Moisture + unstable air + lifting force. Stages: cumulus → MATURE (rain begins, strongest drafts) → dissipating.",
-    rule: "Avoid by 20 NM. Microbursts: downdrafts to 6,000 fpm, ~15 min lifespan.", kw: "thunderstorm mature cumulus microburst lifting" },
+    rule: "Avoid by 20 NM. Microbursts: downdrafts to 6,000 fpm, ~15 min lifespan.", kw: "thunderstorm mature cumulus microburst lifting",
+    src: S("PHAK") },
   { id: "wx-fog", cat: "WX", q: "The four fog types?",
     a: "Radiation (clear calm nights) · Advection (warm moist air over cool surface — coastal FL classic) · Steam · Upslope.",
-    rule: "Temp/dewpoint spread ≤2°C and converging = fog imminent.", kw: "fog radiation advection steam upslope dewpoint" },
+    rule: "Temp/dewpoint spread ≤2°C and converging = fog imminent.", kw: "fog radiation advection steam upslope dewpoint",
+    src: S("PHAK") },
   { id: "wx-da", cat: "WX", q: "Density altitude — what hurts performance?",
     a: "High, hot, humid: air gets less dense, lift and thrust drop.",
-    rule: "Same killer for drones as for Cessnas. Frost/ice disrupts lift even in thin layers.", kw: "density altitude high hot humid performance frost" },
+    rule: "Same killer for drones as for Cessnas. Frost/ice disrupts lift even in thin layers.", kw: "density altitude high hot humid performance frost",
+    src: S("PHAK") },
   { id: "wx-fronts", cat: "WX", q: "Cold front vs warm front?",
     a: "COLD front: fast and steep — cumulus buildups, showers/thunderstorms, sharp gusty wind shift, then rapid clearing with GOOD visibility. WARM front: slow and shallow — layered stratus, drizzle, POOR visibility, arrives with long warning.",
-    rule: "Any frontal passage = wind shift + temperature and pressure change. Worst weather: a front meeting moist, unstable air.", kw: "cold front warm front frontal passage wind shift cumulus stratus occluded" },
+    rule: "Any frontal passage = wind shift + temperature and pressure change. Worst weather: a front meeting moist, unstable air.", kw: "cold front warm front frontal passage wind shift cumulus stratus occluded",
+    src: S("PHAK") },
   { id: "wx-ice", cat: "WX", q: "When do icing and frost matter?",
     a: "Structural ice needs visible moisture + temps at/below freezing. But even a THIN layer of frost disrupts smooth airflow and cuts lift — remove it before flight. Ice also adds weight and wrecks prop efficiency.",
-    rule: "Cold soaks batteries too — LiPo capacity sags near freezing.", kw: "icing frost freezing visible moisture lift props cold" },
+    rule: "Cold soaks batteries too — LiPo capacity sags near freezing.", kw: "icing frost freezing visible moisture lift props cold",
+    src: S("PHAK") },
   { id: "wx-shear", cat: "WX", q: "Where is wind shear worst?",
     a: "Any level, any direction — worst near thunderstorms and temperature inversions.",
-    rule: "Low-level shear near a storm can exceed any sUAS control authority.", kw: "wind shear inversion low level" },
+    rule: "Low-level shear near a storm can exceed any sUAS control authority.", kw: "wind shear inversion low level",
+    src: S("PHAK") },
 ];
